@@ -2,7 +2,7 @@
 
 This application demonstrates a secure authentication and authorization system for AI-powered chat with MCP (Model Context Protocol) integration. The system features role-based access control with JWT tokens and secure MCP server communication.
 
-## <� Architecture Overview
+## > Architecture Overview
 
 The application consists of two main components:
 
@@ -17,7 +17,7 @@ The application consists of two main components:
 - **Role verification** via callback to Elephant AI
 - **Content access control** based on user permissions
 
-## = Security Architecture
+## > Security Architecture
 
 ### Authentication Flow
 
@@ -81,7 +81,7 @@ The application implements **dual-token architecture** for enhanced security:
 - **maxAge**: 24-hour expiration
 - **path**: Global scope (`/`)
 
-## = Authentication Implementation
+## > Authentication Implementation
 
 ### User Management
 Hardcoded users in [`auth.ts`](elephantAi/src/lib/auth.ts:11-25):
@@ -100,7 +100,7 @@ Hardcoded users in [`auth.ts`](elephantAi/src/lib/auth.ts:11-25):
 2. **MCP Forwarding**: MCP token sent to OpenAI in Authorization header
 3. **Error Handling**: 401 responses trigger login redirect
 
-## =� MCP Server Authorization
+## > MCP Server Authorization
 
 ### Role Verification Flow
 The MCP server implements a **callback verification pattern**:
@@ -120,25 +120,24 @@ The MCP server implements a **callback verification pattern**:
 - **Public users**: Access to [`publicElephant.md`](elephantMcp/publicElephant.md) (contains "frank")
 - **Failed auth**: Defaults to public access
 
-## =
- Security Analysis
+## > Security Analysis
 
 ### Strengths
- **Dual-token separation** prevents token misuse  
- **httpOnly cookies** mitigate XSS attacks  
- **JWT signature verification** ensures token integrity  
- **Role-based access control** enforces data segregation  
- **Callback verification** validates MCP requests  
- **bcrypt password hashing** protects credentials  
+- **Dual-token separation** prevents token misuse  
+- **httpOnly cookies** mitigate XSS attacks  
+- **JWT signature verification** ensures token integrity  
+- **Role-based access control** enforces data segregation  
+- **Callback verification** validates MCP requests  
+- **bcrypt password hashing** protects credentials  
 
 ### Security Considerations
-� **Hardcoded users** - Production should use database  
-� **Environment secrets** - Ensure `AI_JWT_SECRET` and `MCP_JWT_SECRET` are cryptographically secure  
-� **HTTPS requirement** - Secure cookies require HTTPS in production  
-� **Token rotation** - No mechanism for token refresh/rotation  
-� **Rate limiting** - No protection against brute force attacks  
+- **Hardcoded users** - Production should use database  
+- **Environment secrets** - Ensure `AI_JWT_SECRET` and `MCP_JWT_SECRET` are cryptographically secure  
+- **HTTPS requirement** - Secure cookies require HTTPS in production  
+- **Token rotation** - No mechanism for token refresh/rotation  
+- **Rate limiting** - No protection against brute force attacks  
 
-## =� Key Files Reference
+## > Key Files Reference
 
 ### Authentication Core
 - [`elephantAi/src/lib/auth.ts`](elephantAi/src/lib/auth.ts) - Core authentication logic
@@ -155,13 +154,13 @@ The MCP server implements a **callback verification pattern**:
 ### Frontend Components
 - [`elephantAi/src/components/LoginForm.tsx`](elephantAi/src/components/LoginForm.tsx) - Authentication UI
 
-## >� Testing Credentials
+## > Testing Credentials
 
 For security auditing purposes:
 - **Username**: `admin` / **Password**: `process.env.USER_PASSWORD || 'password'` (access to secret content)
 - **Username**: `public` / **Password**: `process.env.USER_PASSWORD || 'password'` (access to public content)
 
-## = Production Security Checklist
+## > Production Security Checklist
 
 - [ ] Replace hardcoded users with secure database
 - [ ] Implement rate limiting on authentication endpoints  
